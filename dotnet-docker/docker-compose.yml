@@ -1,0 +1,40 @@
+# This code does several things:
+
+# It creates the front-end website and names it frontend.
+# The code sets an environment variable for the website: ProductEndpoint=http://backend:8080. This code is how the front-end service finds the Products back-end service.
+# The code opens a port and declares that it depends on the back-end service.
+# The back-end service named backend is created next.
+# The last command specifies which port to open.
+
+
+version: '3.4'
+
+services: 
+
+    frontend:
+        image: storeimage
+        build:
+            context: .
+            dockerfile: ./Store/Dockerfile
+        environment: 
+           - ProductEndpoint=http://backend:8080
+        ports:
+           - "32000:8080"
+        depends_on: 
+           - backend
+    backend:
+        image: productservice
+        build: 
+            context: .
+            dockerfile: ./Products/Dockerfile
+        ports: 
+           - "32001:8080"
+
+# To build the container images with .NET container support, 
+# select the Terminal tab, and then run the following command. 
+# Note, if your app is still running, first close with CTRL+C.
+    # dotnet publish /p:PublishProfile=DefaultContainer
+
+# To start both the front-end website and the back-end web API, run this command:
+    # docker compose up
+
