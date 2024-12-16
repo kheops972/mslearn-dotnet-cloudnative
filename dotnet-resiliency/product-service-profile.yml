@@ -1,0 +1,40 @@
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: backend
+  namespace: default
+spec:
+  routes:
+  - condition:
+      method: GET
+      pathRegex: /api/Product
+    name: GET /v1/products
+    isRetryable: true
+  retryBudget:
+    retryRatio: 0.2
+    minRetriesPerSecond: 10
+    ttl: 120s
+
+# Any idempotent HTTP GET route matching the pattern /api/Product can be retried.
+# Retries can add no more than an extra 20 percent to the request load, plus another 10 "free" retries per second.    
+
+# Run the following command to use the service profile in Kubernetes cluster
+
+# kubectl apply -f - <<EOF
+# apiVersion: linkerd.io/v1alpha2
+# kind: ServiceProfile
+# metadata:
+# name: backend
+  # namespace: default
+# spec:
+  # routes:
+  # - condition:
+      # method: GET
+      # pathRegex: /api/Product
+    # name: GET /v1/products 
+    # isRetryable: true
+  # retryBudget:
+    # retryRatio: 0.2
+    # minRetriesPerSecond: 10
+    # ttl: 120s  
+# EOF

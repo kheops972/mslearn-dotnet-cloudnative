@@ -4,6 +4,9 @@ services:
 
   frontend:
     image: store:latest
+    build:
+        context: .
+        dockerfile: ./eShopLite/Store/Dockerfile  
     environment: 
       - ProductEndpoint=http://backend:8080
     ports:
@@ -12,5 +15,8 @@ services:
       - backend
   backend:
     image: products:latest
+    build: 
+        context: .
+        dockerfile: ./eShopLite/Products/Dockerfile 
     ports: 
       - "32001:8080"

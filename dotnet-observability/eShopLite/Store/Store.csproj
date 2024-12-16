@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../Diagnostics/Diagnostics.csproj" />
     <ProjectReference Include="..\DataEntities\DataEntities.csproj" />
   </ItemGroup>
 
@@ -16,6 +17,7 @@
     <PackageReference Include="Microsoft.Extensions.Telemetry" Version="8.*" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.*" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.*" />
+    <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.10.0-beta.1" />
   </ItemGroup>
 
 </Project>

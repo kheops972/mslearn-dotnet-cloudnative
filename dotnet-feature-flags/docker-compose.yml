@@ -4,14 +4,20 @@ services:
 
   frontend:
     image: store:latest
+    build:
+            context: .
+            dockerfile: ./Store/Dockerfile
     environment: 
       - ProductEndpoint=http://backend:8080
-      - ConnectionStrings:AppConfig=[PASTE CONNECTION STRING HERE]
+      - ConnectionStrings:AppConfig=Endpoint=https://eshop-app-features600586531.azconfig.io;Id=zykk;Secret=BCRUwUkLO6mgRLnXZBpLAQ7Pc7tdapIbLamtGi0ooAdjyv9NeDCpJQQJ99ALAC8vTInKFF0GAAACAZACFOG1
     ports:
       - "32000:8080"
     depends_on: 
       - backend
   backend:
     image: products:latest
+    build: 
+            context: .
+            dockerfile: ./Products/Dockerfile
     ports: 
       - "32001:8080"

@@ -14,8 +14,8 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: [replace with your ACR name].azurecr.io/storeimage:v1
-          name: storeimage
+        - image: acseshop467778463.azurecr.io/storeimage:v1
+          name: storeimage          
           resources:
             requests:
               cpu: 100m
@@ -62,7 +62,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: [replace with your ACR name].azurecr.io/productservice:v1
+        - image: acseshop467778463.azurecr.io/productservice:v1
           name: productservice
           resources:
             requests:

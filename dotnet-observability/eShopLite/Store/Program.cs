@@ -1,5 +1,9 @@
 using Store.Components;
 using Store.Services;
+using Microsoft.AspNetCore.Builder; 
+using Microsoft.Extensions.DependencyInjection; 
+using OpenTelemetry.Metrics; 
+using OpenTelemetry.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
  
@@ -16,6 +20,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Add observability code here
+builder.Services.AddObservability("Store", builder.Configuration);
 
 
 var app = builder.Build();
@@ -29,11 +34,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
+app.MapObservability();
 app.Run();

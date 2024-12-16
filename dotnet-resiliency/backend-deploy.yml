@@ -1,4 +1,10 @@
 ---
+
+# The first portion defines a deployment spec for the container to be deployed into Kubernetes. 
+# It specifies one replica, where to find the container image, 
+# which ports to open on the container, and sets some environment variables. 
+# This first portion also defines labels and names that can be used to reference the container and spec.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -7,12 +13,14 @@ spec:
   replicas: 1
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: productsbackend
     spec:
       containers:
       - name: productsbackend
-        image: [YOUR DOCKER USER NAME]/productservice:latest
+        image: t2mil/productservice:latest
         ports:
         - containerPort: 80
         env:
@@ -22,6 +30,11 @@ spec:
     matchLabels:
       app: productsbackend
 ---
+
+# The second portion then defines that the container runs as a Kubernetes NodePort service. 
+# For this module, you don't need to understand all of the specifics of NodePorts. 
+# However, you should know that this type of service exposes an external IP address so you can test the service from outside the cluster.
+
 apiVersion: v1
 kind: Service
 metadata:
