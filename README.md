@@ -21,3 +21,5 @@ Make sure to update the appsettings.json for the database to:
 ```
 
 It has been configured by default for use in a codespace.
+
+Thanks
