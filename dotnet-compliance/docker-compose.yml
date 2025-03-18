@@ -16,7 +16,7 @@ services:
   backend:
     build: 
       context: .
-      dockerfile: /eShopLite/Products.Dockerfile
+      dockerfile: /eShopLite/Products/Dockerfile
     image: products:latest
     ports: 
       - "32001:8080"
