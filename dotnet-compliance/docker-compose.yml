@@ -1,8 +1,10 @@
 version: '3.4'
 
 services: 
-
   frontend:
+    build: 
+      context: .
+      dockerfile: ./eShopLite/Store/Dockerfile  # Si tu as déjà un Dockerfile
     image: store:latest
     environment: 
       - ProductEndpoint=http://backend:8080
@@ -10,7 +12,11 @@ services:
       - "32000:8080"
     depends_on: 
       - backend
+
   backend:
+    build: 
+      context: .
+      dockerfile: ./eShopLite/Products/Dockerfile  # Idem ici
     image: products:latest
     ports: 
       - "32001:8080"
