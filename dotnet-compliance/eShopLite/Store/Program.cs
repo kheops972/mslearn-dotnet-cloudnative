@@ -18,7 +18,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Add redaction
-builder.Services.AddRedaction();
+builder.Services.AddRedaction(configure =>
+{
+    configure.SetRedactor<ErasingRedactor>(new DataClassificationSet(DataClassifications.EUPDataClassification));
+    configure.SetRedactor<EShopCustomRedactor>(new DataClassificationSet(DataClassifications.EUIIDataClassification));
+});
 builder.Services.AddLogging(logging => 
 {
     logging.EnableRedaction();
