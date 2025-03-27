@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /DataEntities
 COPY dotnet-feature-flags/DataEntities/DataEntities.csproj .
 RUN dotnet restore
-COPY DataEntities .
+COPY dotnet-feature-flags/DataEntities .
 RUN dotnet publish -c release -o /app
 
 WORKDIR /src
